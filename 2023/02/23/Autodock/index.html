@@ -95,7 +95,19 @@
 
 <p><font face="楷体" >在使用Autodock进行分子对接的时候需要把蛋白质受体和小分子配体文件转换为pdbqt格式的文件，Autodock提供了Autodock Tools，可以用于生成pdbqt格式的文件</font><br><font face="楷体" >蛋白质结构文件的准备：去水，去溶剂分子和不需要的金属离子，加氢，修复缺失的残基侧链原子，同源二聚体保留一条链</font><br><font face="楷体" >金属离子和溶剂水分子可以在pymol中直接删除</font></p>
 <p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock1.png" alt="图1" title="图1"></p>
-<p><font face="楷体" >如果蛋白是同源二聚体，可以删除其中一条链，在Pymol命令行中输入：remove chain B</font><br><font face="楷体" >加氢可以在Pymol中进行也可以在AutodockTools中进行</font><br><font face="楷体" >① 在Pymol中加氢：在命令行中输入h_add</font><br><font face="楷体" >② 在AutodockTools中加氢</font></p>
+<p><font face="楷体" >如果蛋白是同源二聚体，可以删除其中一条链，在Pymol命令行中输入：remove chain B</font><br><font face="楷体" >加氢可以在Pymol中进行也可以在AutodockTools中进行</font><br><font face="楷体" >① 在Pymol中加氢：在命令行中输入h_add</font><br><font face="楷体" >② 在AutodockTools中加氢：首先将蛋白质文件读入，file——read molecule，然后点击edit——hydrogen——add</font></p>
+<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock2.png" alt="图2" title="图2"></p>
+<p><font face="楷体" >加氢之后，还需要加电荷和改变原子类型。对于使用AutodockTools进行加氢的情况，加氢之后点击Grid——Macromolecules——choose，选择软件中的蛋白质文件即可，然后它就会自己加电荷和改变原子类型，完成之后会自动弹出一个保存窗口，保存为pdbqt文件类型即可；对于使用Pymol进行加氢的情况，直接点击Grid——Macromolecules——open，打开Pymol生成的加过氢的蛋白质pdb文件，然后文件就会直接读取进来并且完成加电荷和改变原子类型，然后弹出保存框，保存为pdbqt类型的文件即可</font></p>
+<p><font face="楷体" >此时，蛋白质受体的pdbqt文件就准备好了</font></p>
+<pre><code class="hljs bash">2、准备小分子配体pdbqt文件</code></pre>
+
+<p><font face="楷体" >小分子配体文件的处理和蛋白质受体文件是类似的，只不过小分子文件在加电荷和改变原子类型的时候和蛋白质文件有所不同，点击ligand——input——choose&#x2F;open，如果是已经在Pymol中加氢了，则点击open，打开保存的加过氢的小分子配体文件；如果没有在Pymol中加氢，先读入小分子配体文件，然后点击edit——hydrogen——add，加氢之后点击ligand——input——choose，选择软件内的小分子配体文件。这样，小分子配体文件就完成了加电荷和改变原子类型的操作</font></p>
+<p><font face="楷体" >小分子配体文件和蛋白质受体文件不同的是，除了要完成加电荷和改变原子类型的处理之外，小分子文件还要定义一下torsion，即定义哪些键是可以旋转的，哪些键是不能旋转的。双键一般不能旋转，单键可以旋转。点击ligand——torsion tree——detect root，小分子中心就会出现一个球型</font></p>
+<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock3.png" alt="图3" title="图3"></p>
+<p><font face="楷体" >然后点击ligand——torsion tree——choose torsion，就会出现一个新的面板，并且把小分子的颜色染成红色、绿色或者是紫红色</font></p>
+<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock4.png" alt="图4" title="图4"></p>
+<p><font face="楷体" >红色代表这些键是不能自由旋转的，绿色代表这些键是可以旋转的，紫红色代表这些键是可以选择的。如果想要把紫红色的键设置为可以旋转的，就按住shift键点击一下该键，就可以让该键变成绿色，即可旋转的键，当它是紫红色的时候表示不能旋转。如果设置完毕，则直接点击面板中最下方的done</font></p>
+<p><font face="楷体" >然后小分子配体文件的处理就完成了，点击ligand——output——save as PDBQT，保存为pdbqt文件</font></p>
 
       </div>
     </div>
