@@ -95,9 +95,12 @@
 
 <pre><code class="hljs bash">1、准备蛋白质受体pdbqt文件</code></pre>
 
-<p><font face="楷体" >在使用Autodock进行分子对接的时候需要把蛋白质受体和小分子配体文件转换为pdbqt格式的文件，Autodock提供了Autodock Tools，可以用于生成pdbqt格式的文件</font><br><font face="楷体" >蛋白质结构文件的准备：去水，去溶剂分子和不需要的金属离子，加氢，修复缺失的残基侧链原子，同源二聚体保留一条链</font><br><font face="楷体" >金属离子和溶剂水分子可以在pymol中直接删除</font></p>
+<p><font face="楷体" >在使用Autodock进行分子对接的时候需要把蛋白质受体和小分子配体文件转换为pdbqt格式的文件，Autodock提供了Autodock Tools，可以用于生成pdbqt格式的文件</font></p>
+<p><font face="楷体" >蛋白质结构文件的准备：去水，去溶剂分子和不需要的金属离子，加氢，修复缺失的残基侧链原子，同源二聚体保留一条链</font></p>
+<p><font face="楷体" >金属离子和溶剂水分子可以在pymol中直接删除</font></p>
 <p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock1.png" alt="图1" title="图1"></p>
-<p><font face="楷体" >如果蛋白是同源二聚体，可以删除其中一条链，在Pymol命令行中输入：remove chain B</font><br><font face="楷体" >加氢可以在Pymol中进行也可以在AutodockTools中进行</font><br><font face="楷体" >① 在Pymol中加氢：在命令行中输入h_add</font><br><font face="楷体" >② 在AutodockTools中加氢：首先将蛋白质文件读入，file——read molecule，然后点击edit——hydrogen——add</font></p>
+<p><font face="楷体" >如果蛋白是同源二聚体，可以删除其中一条链，在Pymol命令行中输入：remove chain B</font></p>
+<p><font face="楷体" >加氢可以在Pymol中进行也可以在AutodockTools中进行</font><br><font face="楷体" >① 在Pymol中加氢：在命令行中输入h_add</font><br><font face="楷体" >② 在AutodockTools中加氢：首先将蛋白质文件读入，file——read molecule，然后点击edit——hydrogen——add</font></p>
 <p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock2.png" alt="图2" title="图2"></p>
 <p><font face="楷体" >加氢之后，还需要加电荷和改变原子类型。对于使用AutodockTools进行加氢的情况，加氢之后点击Grid——Macromolecules——choose，选择软件中的蛋白质文件即可，然后它就会自己加电荷和改变原子类型，完成之后会自动弹出一个保存窗口，保存为pdbqt文件类型即可；对于使用Pymol进行加氢的情况，直接点击Grid——Macromolecules——open，打开Pymol生成的加过氢的蛋白质pdb文件，然后文件就会直接读取进来并且完成加电荷和改变原子类型，然后弹出保存框，保存为pdbqt类型的文件即可</font></p>
 <p><font face="楷体" >此时，蛋白质受体的pdbqt文件就准备好了</font></p>
@@ -110,6 +113,29 @@
 <p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock4.png" alt="图4" title="图4"></p>
 <p><font face="楷体" >红色代表这些键是不能自由旋转的，绿色代表这些键是可以旋转的，紫红色代表这些键是可以选择的。如果想要把紫红色的键设置为可以旋转的，就按住shift键点击一下该键，就可以让该键变成绿色，即可旋转的键，当它是紫红色的时候表示不能旋转。如果设置完毕，则直接点击面板中最下方的done</font></p>
 <p><font face="楷体" >然后小分子配体文件的处理就完成了，点击ligand——output——save as PDBQT，保存为pdbqt文件</font></p>
+<p><font face="楷体" >如果小分子配体文件为sdf格式，AutodockTools是无法直接读取的。因此需要对sdf文件进行格式转换，转换为pdb格式或者mol2格式。</font></p>
+<pre><code class="hljs bash">openbabel格式转换</code></pre>
+
+<p><font face="楷体" >我将openbabel安装在了名为openbabel的虚拟环境中，因此在使用openbabel之前需要在终端激活该环境，输入activate openbabel</font></p>
+<p><font face="楷体" >激活了虚拟环境之后，cd到小分子配体文件所在的目录下，输入类似以下命令：</font><br><font face="楷体" >obabel -isdf imatinib_3d.sdf -omol2 imatinib_3d.mol2</font><br><font face="楷体" >上面的命令不会直接生成一个文件，而是把内容打印在终端上。-i后面是输入文件的类型，然后是输入文件的名称；-o后面是输出文件的类型，然后是输出文件的名称。</font></p>
+<p><font face="楷体" >如果想要直接生成文件而不是在终端上打印出来，输入以下命令：</font><br><font face="楷体" >obabel -isdf imatinib.sdf -omol2 -O imatinib.sdf</font><br><font face="楷体" >也就是在输出文件的名字前面加一个-O</font></p>
+<p><font face="楷体" >此外，openbabel也可以将2d结果转换为3d结构。因此如果是自己设计或者优化的一个小分子配体结构，在数据库中搜不到对应的sdf文件或者pdb文件，而是自己用chemdraw等软件画出来的2D结构，即可以用openbabel将其转换为3d结构</font><br><font face="楷体" >obabel -isdf imatinib_2D.sdf -opdb -O imatinib_3D.pdb –gen3D -p 7.4</font><br><font face="楷体" >上面的命令将其转换为pH&#x3D;7.4时的3D结构</font></p>
+<p><font face="楷体" >至此就讲完了使用openbabel转换文件格式的方法</font></p>
+<pre><code class="hljs bash">3、生成对接所需要的config文件</code></pre>
+
+<p><font face="楷体" >在对接之前，还要使用AutodockTools生成一个config文件，该文件记录了输入的蛋白质受体文件、小分子配体文件、输出文件的名称以及对接盒子的位置和大小等信息。</font></p>
+<p><font face="楷体" >首先将蛋白质和小分子文件读入AutodockTools中</font><br><font face="楷体" >对于蛋白质：点击Grid——Macromolecules——open</font><br><font face="楷体" >对于小分子，点击Grid——Set Map Types——open ligand</font></p>
+<p><font face="楷体" >然后是定义对接盒子，点击Grid——Grid Box，会出现一个新的面板，如下图</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock5.png" alt="图5" title="图5"><br><font face="楷体" >点击center——center on ligand，就会以小分子配体为中心定义一个对接盒子，用鼠标拖动x、y、z就可以改变盒子的大小，当然对接盒子的位置和大小可以自己定义，这里仅是举个例子</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock6.png" alt="图6" title="图6"><br><font face="楷体" >定义好对接盒子之后，点击File——Close saving current就可以保存定义好的对接盒子</font><br><font face="楷体" >然后点击Docking——Output——vina config，生成config文件</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock7.png" alt="图7" title="图7"><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock8.png" alt="图8" title="图8"><br><font face="楷体" >如果不需要修改任何参数的话就可以直接点击Save，这样就生成了config文件，当然也可以修改参数比如输出文件名称等，再点击保存</font></p>
+<p><font face="楷体" >这样就完成了config文件的生成，接下来就可以进行对接了，可以直接在AutodockTools中进行对接，也可以直接在命令行中输入命令进行对接</font></p>
+<pre><code class="hljs bash">4、用Autodock vina进行对接</code></pre>
+
+<p><font face="楷体" >首先先来介绍三种基于Autodock的对接程序</font><br><font face="楷体" >vina：不需要用户广泛的专业知识，经过高度优化，使用经过良好测试的默认方法执行对接实验</font><br><font face="楷体" >Quickvina 2：对Autodock vina进行了不丢失准确率的提速</font><br><font face="楷体" >Quickvina-W：在Quickvina 2的基础上增加了blind docking，比Quickvina2更快，比Autodock vina更准确</font></p>
+<p><font face="楷体" >如果在AutodockTools中进行对接，点击Run——Run Autodock vina</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock9.png" alt="图9" title="图9"><br><font face="楷体" >填写vina程序的路径名称和config文件的名字，点击Launch就可以进行对接了</font></p>
+<p><font face="楷体" >对接之前可以直接对config文件进行修改</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock10.png" alt="图10" title="图10"><br><font face="楷体" >文件中包含了输入的蛋白质文件和小分子文件的名称、对接盒子的坐标和大小以及输出文件的名称等信息，可以根据需要进行修改</font></p>
+<p><font face="楷体" >直接使用命令进行对接</font><br><font face="楷体" >打开终端，cd到vina程序和输入文件所在的目录下，输入命令：</font><br><font face="楷体" >.\vina.exe –config config.txt</font><br><font face="楷体" >输入以上命令之后就会开始对接，对接完成后会出现以下界面</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/Autodock11.png" alt="图11" title="图11"><br><font face="楷体" >affinity越小结果越好</font></p>
+<p><font face="楷体" >生成对接结果文件之后，可以在AutodockTools中打开pdbqt类型的结果文件，点击Analyze——Docking——open AutoDock vina result</font><br><font face="楷体" >可以用键盘上的左右方向键来查看结果</font></p>
+<p><font face="楷体" >qvina2和qvinaw的使用方法</font><br><font face="楷体" >qvina2和qvinaw都可以直接在终端中输入命令行来运行，因为我把它们安装在了qvina虚拟环境中，因此首先输入activate qvina</font><br><font face="楷体" >然后cd到输入文件所在的工作目录中，输入：</font><br><font face="楷体" >qvina2 –config config.txt</font><br><font face="楷体" >qvina2 –config config.txt</font></p>
+<p><font face="楷体" >至此使用Autodock vina进行分子对接的流程已经全部介绍完毕，对于结果文件的分析将写在下一期的文章中</font></p>
 </p>
       <div class="post-button"><a class="btn" href="/2023/02/23/Autodock/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
