@@ -87,10 +87,28 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/02/28/Autodock-2/">Autodock对接结果分析</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-02-28</span>
+      <p><div class="note default">
+            <h1 id="Autodock对接结果分析"><a href="#Autodock对接结果分析" class="headerlink" title="Autodock对接结果分析"></a><font face="宋体" >Autodock对接结果分析</font></h1>
+          </div>
+
+<pre><code class="hljs bash">1、用AutodockTools分析结果</code></pre>
+
+<p><font face="楷体" >点击Analyze——Docking——Open Autodock vina result，打开生成的pdbqt类型的对接结果文件</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/duijiejieguo1.png" alt="图1" title="图1"><br><font face="楷体" >打开之后可以用键盘的左右方向键切换结果包含的几个pose，同时还会显示每个pose的对接分数</font><br><font face="楷体" >如果想展示受体蛋白和小分子对接之后的相互作用，可以把受体蛋白也加载进来，点击Analyze——Macromolecule——Open，打开受体蛋白的pdbqt文件</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/duijiejieguo2.png" alt="图2" title="图2"><br><font face="楷体" >然后点击Analyze——Docking——Show interactions</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/duijiejieguo3.png" alt="图3" title="图3"></p>
+<pre><code class="hljs bash">2、生成某个pose的小分子与蛋白质的pdb复合物文件</code></pre>
+
+<p><font face="楷体" >在ADT中是无法将蛋白质和小分子保存到同一个文件里面的，但是可以保存对接后小分子的某一个pose到PDB文件里</font><br><font face="楷体" >首先打开对接的结果文件，用键盘的左右方向键切换pose，切换到想要保存的pose，然后点击File——Save——write PDB，</font><br><img src="https://raw.githubusercontent.com/zczali4403/photo/main/duijiejieguo4.png" alt="图4" title="图4"><br><font face="楷体" >这样就把pdbqt格式的结果文件中的某一个pose的小分子保存为了pdb文件</font></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/02/28/Autodock-2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/02/23/Autodock/">Autodock分子对接</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-02-23</span>
       <p><div class="note default">
-            <h1 id="Autodock分子对接的流程和遇到的问题"><a href="#Autodock分子对接的流程和遇到的问题" class="headerlink" title="Autodock分子对接的流程和遇到的问题"></a><font face="宋体" >Autodock分子对接的流程和遇到的问题</font></h1>
+            <h1 id="Autodock分子对接流程"><a href="#Autodock分子对接流程" class="headerlink" title="Autodock分子对接流程"></a><font face="宋体" >Autodock分子对接流程</font></h1>
           </div>
 
 <pre><code class="hljs bash">1、准备蛋白质受体pdbqt文件</code></pre>
@@ -145,7 +163,7 @@
       <h2 class="title"><a href="/2023/02/23/discovery-studio/">Discovery Studio分子对接</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-02-23</span>
       <p><div class="note default">
-            <h1 id="Discovery-Sudio分子对接的流程和遇到的问题"><a href="#Discovery-Sudio分子对接的流程和遇到的问题" class="headerlink" title="Discovery Sudio分子对接的流程和遇到的问题"></a><font face="宋体" >Discovery Sudio分子对接的流程和遇到的问题</font></h1>
+            <h1 id="Discovery-Sudio分子对接的流程"><a href="#Discovery-Sudio分子对接的流程" class="headerlink" title="Discovery Sudio分子对接的流程"></a><font face="宋体" >Discovery Sudio分子对接的流程</font></h1>
           </div>
 
 <pre><code class="hljs bash">1、准备蛋白质受体文件</code></pre>
