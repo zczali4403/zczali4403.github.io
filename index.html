@@ -147,6 +147,11 @@ https://kenhanscombe.github.io/ukbtools/articles/explore-ukb-data.html
           </div>
 
 <p><font face="楷体" >之前在晚上散步的时候总是手机插上有线耳机，然后把手机拿在手里边听歌边散步。对我来说这是一天中最放松的时刻，因为思绪可以忽然从我的脑子里飘到天空中的一朵云，又忽然从一朵云飘到一句刚刚入耳的歌词，亦或者，飘到一个很远很远的地方，想一些乱七八糟的事情，关于生活，关于人生，甚至可以关于明天吃几个馒头。但是今天我突然发现我一直在做一件很蠢的事情——我似乎没有必要手里拿着手机，突然发现，即便是插着有线耳机，也可以把手机放进裤兜里！</font><img src="https://github.com/zczali4403/photo/blob/main/black_face.jpg?raw=true" alt="黑脸" title="黑脸"></p>
+<div class="note default">
+            <h1 id="2023年10月24日随笔"><a href="#2023年10月24日随笔" class="headerlink" title="2023年10月24日随笔"></a><font face="宋体" >2023年10月24日随笔</font></h1>
+          </div>
+
+<p><font face="楷体" >之前一直认为单细胞转录组测序中在Seurat里面经过了NormalizeData处理过的数据仅仅矫正了测序深度，而没有矫正基因长度的影响。因此NormalizeData之后的数据和TPM值是不等同的，因为TPM值是既矫正了基因长度，又矫正了测序深度。但是今天突然意识到一件事情，10X技术在建库测序的时候，对基因表达量的测定并不是依靠mapping到的片段的数量，也就是并不是靠UMI的数量来定量的，而是考UMI的种类来定量的，因此10X建库测序本来就消除了基因长度的影响。因此这里的NormalizeData之后的data数据和TPM值其实是近似等同的。</font></p>
 </p>
       <div class="post-button"><a class="btn" href="/2023/10/09/zatan1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
