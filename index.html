@@ -87,8 +87,8 @@
 
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2023/10/31/%E6%9D%82%E8%B0%88/">随笔杂谈</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-10-31</span>
+      <h2 class="title"><a href="/2023/11/02/%E6%9D%82%E8%B0%88/">随笔杂谈</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-02</span>
       <p><div class="note default">
             <h1 id="2023年10月10日随笔"><a href="#2023年10月10日随笔" class="headerlink" title="2023年10月10日随笔"></a><font face="宋体" >2023年10月10日随笔</font></h1>
           </div>
@@ -109,8 +109,13 @@
           </div>
 
 <p><font face="楷体" >之前一直认为单细胞转录组测序中在Seurat里面经过了NormalizeData处理过的数据仅仅矫正了测序深度，而没有矫正基因长度的影响。因此NormalizeData之后的数据和TPM值是不等同的，因为TPM值是既矫正了基因长度，又矫正了测序深度。但是今天突然意识到一件事情，10X技术在建库测序的时候，对基因表达量的测定并不是依靠mapping到的片段的数量，也就是并不是靠UMI的数量来定量的，而是考UMI的种类来定量的，因此10X建库测序本来就消除了基因长度的影响。因此这里的NormalizeData之后的data数据和TPM值其实是近似等同的。</font></p>
+<div class="note default">
+            <h1 id="2023年11月2日随笔"><a href="#2023年11月2日随笔" class="headerlink" title="2023年11月2日随笔"></a><font face="宋体" >2023年11月2日随笔</font></h1>
+          </div>
+
+<p><font face="楷体" >突然想到可以用深度学习做一件很有意思的事情，特别是对于生命科学而言。在生物学领域中，很多情况下是做了一些实验，发现了一些现象比如某个基因表达量上升了或者下降了还是怎样，然后猜想这个基因可能和疾病的发病机制之类的有关系。但是如果真的要找到这个基因的作用机制，就需要去查阅大量的文献去看这个基因的功能以及上下游，并且还有可能因为文献查的不够多，漏掉了这个基因曾经被报道过的一些知识，以至于错过了它导致疾病的机制的发现机会。</font><br><font face="楷体" >嗯。。。说的似乎有些混乱。也就是说，无论知识再丰富的生物学家吗，也不可能了解生物学所有的知识，比如某个蛋白某个基因是干什么的，通常很多情况下都需要搜寻文献来了解。并且，看待同样一个现象，知识渊博的人和知识匮乏的人看的东西是不一样的，也就是说，比如我看到一个基因表达量升高，并且我正好知道另外一个和这个基因相关的基因或者知识点，我就有可能把这两件事情联想在一起从而发现一个新的机制，但是如果我不知道那个知识点，我就肯定无法找到这个新的机制。因此是否我们可以通过深度学习，去训练一个模型，让它能够充分了解当今生物学所有前沿的知识点，也就是文献中报告的，包括某某某蛋白的功能，某某某基因怎么怎么样了等等等。那么它现在就是一个世界上生物学知识最丰富的“人”了，那么如果有一个新现象被观察到，那么是否它就可以根据自己已有的知识进行联想，推测出这个新现象发生的可能，当然也仅仅是可能，因为也不是所有文献报道的东西就是完全正确的。</font></p>
 </p>
-      <div class="post-button"><a class="btn" href="/2023/10/31/%E6%9D%82%E8%B0%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2023/11/02/%E6%9D%82%E8%B0%88/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
