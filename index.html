@@ -87,6 +87,35 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/11/09/wget%E5%90%8C%E6%97%B6%E4%B8%8B%E8%BD%BD%E5%A4%9A%E4%B8%AA%E8%BF%9E%E7%BB%AD%E6%96%87%E4%BB%B6/">使用wget同时下载多个连续文件</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-09</span>
+      <p><div class="note default">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font face="宋体" >前言</font></h1>
+          </div>
+<p><font face="宋体" >今天一个朋友让我帮忙下载200多个编号连续的文件，但是一个一个手动点击下载实在是麻烦。因此就写了一个小脚本做这件事情，特此记录一下以后遇到类似的问题也可以用类似的方法解决。</font></p>
+<div class="note default">
+            <h1 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a><font face="宋体" >适用情况</font></h1>
+          </div>
+<p><font face="宋体" >朋友让我下载的文件的编码都是连续的，如下图所示：</font></p>
+<p><img src="https://github.com/zczali4403/photo/blob/main/%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5.png?raw=true" alt="适用情况" title="适用情况"></p>
+<div class="note default">
+            <h1 id="R脚本——生成所有文件的URL链接文件"><a href="#R脚本——生成所有文件的URL链接文件" class="headerlink" title="R脚本——生成所有文件的URL链接文件"></a><font face="宋体" >R脚本——生成所有文件的URL链接文件</font></h1>
+          </div>
+<p><font face="宋体" >下载文件的编号是从2023001到2023237。</font></p>
+<p><font face="Arial" color=#0000FF>a &#x3D; ‘’</font><br><font face="Arial" color=#0000FF>for(i in seq(2023001,2023237)){</font><br><font face="Arial" color=#0000FF>    b &lt;- paste0(‘<a target="_blank" rel="noopener" href="http://www.ppp-wizard.net/products/POST_PROCESSED/post_',i,'.tgz','/n">http://www.ppp-wizard.net/products/POST_PROCESSED/post_&#39;,i,&#39;.tgz&#39;,&#39;\n</a>‘)</font><br><font face="Arial" color=#0000FF>    a &#x3D; paste0(a,b)</font><br><font face="Arial" color=#0000FF>}</font><br><font face="Arial" color=#0000FF>write.table(a,’a.txt’,row.names &#x3D; F,col.names &#x3D; F,quote &#x3D; F)</font></p>
+<p><font face="宋体" >这样就生成了一个每一行对应一个文件的URL下载地址的文本文件</font></p>
+<p><img src="https://github.com/zczali4403/photo/blob/main/URL%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6.png?raw=true" alt="URL文本文件" title="URL文本文件"></p>
+<div class="note default">
+            <h1 id="Linux中用wget-i下载文本文件中URL对应的全部文件"><a href="#Linux中用wget-i下载文本文件中URL对应的全部文件" class="headerlink" title="Linux中用wget -i下载文本文件中URL对应的全部文件"></a><font face="宋体" >Linux中用wget -i下载文本文件中URL对应的全部文件</font></h1>
+          </div>
+
+<p><font face="Arial" color=#0000FF>wget -i a.txt</font></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/11/09/wget%E5%90%8C%E6%97%B6%E4%B8%8B%E8%BD%BD%E5%A4%9A%E4%B8%AA%E8%BF%9E%E7%BB%AD%E6%96%87%E4%BB%B6/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/11/02/%E6%9D%82%E8%B0%88/">随笔杂谈</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-02</span>
       <p><div class="note default">
