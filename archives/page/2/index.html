@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>使用wget同时下载多个连续文件 | Welcome to Chengzhi&#39;s space!</title>
+  <title>Archives | Welcome to Chengzhi&#39;s space!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Chengzhi Zhao">
   <meta name="keywords" content="">
@@ -63,17 +63,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body>
-<div class="single">
 
 <div id="page">
+
 <div class="header">
-  <div id="lx-aside" style="background-image: url(https://raw.githubusercontent.com/zczali4403/tips/main/2.jpg)" data-stellar-background-ratio="0.5">
+  <div id="lx-aside" style="background-image: url(https://raw.githubusercontent.com/zczali4403/tips/main/3.jpg)">
     <div class="overlay">
       
-      <div class="page-title">
+      <div class="featured">
         <div class="avatar"><a href="/"><img src="https://raw.githubusercontent.com/zczali4403/tips/main/1.jpg" alt="Chengzhi Zhao"></a></div>
-        <span>2023-11-09</span>
-        <h2>使用wget同时下载多个...</h2>
+        <span>Chengzhi Zhao</span>
+        <h1>Welcome to Chengzhi's space!</h1>
         
         <div class="social-links">
     <a href="https://github.com/zczali4403" target="_blank" title="social-link"><i class="fa fa-github fa-fw"></i></a>
@@ -85,63 +85,13 @@
 </div>
 <div id="lx-main-content">
   <div class="lx-post">
-    <div class="lx-entry padding">
-      <div>
-        <div class="note default">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font face="宋体" >前言</font></h1>
-          </div>
-<p><font face="宋体" >今天一个朋友让我帮忙下载200多个编号连续的文件，但是一个一个手动点击下载实在是麻烦。因此就写了一个小脚本做这件事情，特此记录一下以后遇到类似的问题也可以用类似的方法解决。</font></p>
-<div class="note default">
-            <h1 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a><font face="宋体" >适用情况</font></h1>
-          </div>
-<p><font face="宋体" >朋友让我下载的文件的编码都是连续的，如下图所示：</font></p>
-<p><img src="https://github.com/zczali4403/photo/blob/main/%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5.png?raw=true" alt="适用情况" title="适用情况"></p>
-<div class="note default">
-            <h1 id="R脚本——生成所有文件的URL链接文件"><a href="#R脚本——生成所有文件的URL链接文件" class="headerlink" title="R脚本——生成所有文件的URL链接文件"></a><font face="宋体" >R脚本——生成所有文件的URL链接文件</font></h1>
-          </div>
-<p><font face="宋体" >下载文件的编号是从2023001到2023237。</font></p>
-<p><font face="Arial" color=#0000FF>a &#x3D; ‘’</font><br><font face="Arial" color=#0000FF>for(i in seq(2023001,2023237)){</font><br><font face="Arial" color=#0000FF>　　b &lt;- paste0(‘<a target="_blank" rel="noopener" href="http://www.ppp-wizard.net/products/POST_PROCESSED/post_',i,'.tgz','/n">http://www.ppp-wizard.net/products/POST_PROCESSED/post_&#39;,i,&#39;.tgz&#39;,&#39;\n</a>‘)</font><br><font face="Arial" color=#0000FF>　　a &#x3D; paste0(a,b)</font><br><font face="Arial" color=#0000FF>}</font><br><font face="Arial" color=#0000FF>write.table(a,’a.txt’,row.names &#x3D; F,col.names &#x3D; F,quote &#x3D; F)</font></p>
-<p><font face="宋体" >这样就生成了一个每一行对应一个文件的URL下载地址的文本文件</font></p>
-<p><img src="https://github.com/zczali4403/photo/blob/main/URL%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6.png?raw=true" alt="URL文本文件" title="URL文本文件"></p>
-<div class="note default">
-            <h1 id="Linux中用wget-i下载文本文件中URL对应的全部文件"><a href="#Linux中用wget-i下载文本文件中URL对应的全部文件" class="headerlink" title="Linux中用wget -i下载文本文件中URL对应的全部文件"></a><font face="宋体" >Linux中用wget -i下载文本文件中URL对应的全部文件</font></h1>
-          </div>
-
-<p><font face="Arial" color=#0000FF>wget -i a.txt</font></p>
-
-      </div>
-    </div>
-  </div>
-</div>
-<div class="lx-navigation">
-	<div class="lx-cover next lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-l.min.jpeg)">
-		<div class="overlay"></div>
-		<a class="copy" href="/2023/11/13/%E6%96%B0%E7%94%B5%E8%84%91%E5%92%8C%E9%85%8D%E7%BD%AE/">
-			<div class="display-t">
-				<div class="display-tc">
-					<div>
-						<span>Next</span>
-						<h3>电脑装机必备软...</h3>
-					</div>
-				</div>
-			</div>
-		</a>
-	</div>
-        <div class="lx-cover prev lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-r.min.jpeg)">
-		<div class="overlay"></div>
-		<a class="copy" href="/2023/11/02/%E6%9D%82%E8%B0%88/">
-			<div class="display-t">
-				<div class="display-tc">
-					<div>
-						<span>Prev</span>
-						<h3>随笔杂谈</h3>
-					</div>
-				</div>
-			</div>
-		</a>
-	</div>
-</div>
-
+  <h2 class="pagehead">Archives</h2>
+    <div class="lx-entry padding"><div>
+    <span class="lx-post-detail">2023-02-16</span>
+    <h2 class="title"><a href="/2023/02/16/hello-world/">回忆录（一）城市篇</a></h2>
+    <p></p></div></div>
+<div id="pagination">
+  <a class="extend prev" rel="prev" href="/archives/"></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
 </div>
 
 <footer>
@@ -150,6 +100,8 @@
   </div>
 </footer>
 
+  </div>
+</div>
 </div>
 
 <button class="hamburger hamburger--arrow-r" type="button" title="menu">
