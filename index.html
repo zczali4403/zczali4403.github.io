@@ -87,6 +87,34 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/11/17/wsl_Rstudio/">WSL中Rstudio-server调用mamba虚拟环境中的R</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-17</span>
+      <p><div class="note default">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font face="宋体" >前言</font></h1>
+          </div>
+
+<p><font face="宋体" >最近换了新的台式机，之前都是直接在服务器上linux系统中跑data。远程调用服务器上的R的话主流一般就是两种方式，一种是用vscode装插件，一种就是用Rstudio server。一般我是用mamba管理各种R和python的包，用vscode远程去跑data的，因为个人不太喜欢Rstudio。但是现在有了新的台式机，也想试试windows台式机跑data的速度，因此我本来是在windows台式机上装了mamba，并且用mamba创建了虚拟环境安装了R（之所以这么做是因为mamba或者conda管理R包或者python包真的很方便，不想在R中用install_packages&#x2F;biocmanager等等去安装R包，会遇到无数的依赖问题），然后去安装了Rstudio。本来按照我的设想，因为Rstudio是可以改变R的版本的，也就是它可以更改R内核的路径，因此我就把它的路径改为了mamba虚拟环境中安装的R的路径，但是却发现Rstudio不能兼容mamba安装的R，这就很操蛋了。。。。但是我又不想放弃用mamba管理R包。</font><br><font face="宋体" >所以这就是为什么我要大费周章的在windows系统上装一个wsl，又在wsl中装一个Rstudio server，用Rstudio server来跑data。纯属是因为windows的Rstudio不支持mamba&#x2F;conda安装的R包，但是我想测试一下这台windows电脑跑data的性能同时又不想放弃用mamba管理。（但其实日常的工作还是在服务器上进行的，搞这个纯属是一时兴起）。</font></p>
+<pre><code class="hljs bash">1、安装wsl</code></pre>
+
+<p><font face="宋体" >首先就是要安装wsl，只需要用管理员身份运行PowerShell，然后输入：</font><br><font face="Arial" color=#0000FF>wsl –install -d Ubuntu-22.04</font><br><font face="宋体" >不过在此之前需要进行一些设置，这里就不再详细写了，google一下wsl安装方法按流程走基本不会有什么问题。当然这里也可以选择不安装Ubuntu，安装其他linnux系统也可以。</font><br><font face="宋体" >下载好wsl之后，最好修改一下ubuntu的apt下载镜像，因为一开始用的是全球的镜像，下载速度可能比较慢。建议换成阿里云的镜像。</font><br><font face="宋体" >保险起见，可以首先把原来的apt镜像文件备份一下，也就是&#x2F;etc&#x2F;apt&#x2F;sources,list这个文件。</font><br><font face="Arial" color=#0000FF>sudo cp -v &#x2F;etc&#x2F;apt&#x2F;sources.list &#x2F;etc&#x2F;apt&#x2F;sources.list.backup</font><br><font face="宋体" >随后可以设置一下这个文件的权限，方便修改。</font><br><font face="Arial" color=#0000FF>sudo chmod 777 &#x2F;etc&#x2F;apt&#x2F;sources.list</font><br><font face="宋体" >然后用vim对该文件进行修改，把文件内容替换为如下内容：</font><br><img src="https://github.com/zczali4403/photo/blob/main/apt_sources.png?raw=true" alt="apt_sources" title="apt_sources"><br><font face="宋体" >修改之后进行一次更新。</font><br><font face="Arial" color=#0000FF>sudo apt update</font></p>
+<pre><code class="hljs bash">2、安装micromamba</code></pre>
+
+<p><font face="宋体" >然后就是micromamba的安装，关于micromamba&#x2F;mamba&#x2F;conda这里就不再详细说明，总之mamba是conda的一个替代产品，它的速度会比conda更快，而micromamba，顾名思义，就是micro的mamba。micromamba&#x2F;mamba的所有命令和conda都是一样的，当然这里也可以选择使用conda或者mamba。</font><br><font face="宋体" >micromamba的下载步骤在官网介绍的很清楚：<a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#">https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#</a></font><br><font face="宋体" >首先下载并解压micromamba（这里下载的是针对自己系统版本的micromamba，不同系统不一样）</font><br><font face="Arial" color=#0000FF>curl -Ls <a target="_blank" rel="noopener" href="https://micro.mamba.pm/api/micromamba/linux-64/latest">https://micro.mamba.pm/api/micromamba/linux-64/latest</a> | tar -xvj bin&#x2F;micromamba</font><br><font face="宋体" >其他系统版本的下载命令如下：</font><br><img src="https://github.com/zczali4403/photo/blob/main/micromamba.png?raw=true" alt="micromamba" title="micromamba"><br><font face="宋体" >解压完成后配置一下micromamba的环境，在环境变量中添加micromamba，以便可以在任意位置调用。</font><br><font face="Arial" color=#0000FF>.&#x2F;bin&#x2F;micromamba shell init -s bash -p ~&#x2F;micromamba</font><br><font face="Arial" color=#0000FF>source ~&#x2F;.bashrc</font><br><font face="宋体" >micromamba到此就安装好了，现在就可以使用它创建新的环境并且安装不同版本的R了。micromamba或者mamba更详细的安装和使用说明见上面的官网链接。</font></p>
+<pre><code class="hljs bash">3、安装Rstudio server</code></pre>
+
+<p><font face="宋体" >接下来是安装Rstudio server，这里安装的是ubuntu22的版本。安装其他版本详见：<a target="_blank" rel="noopener" href="https://posit.co/download/rstudio-server/">https://posit.co/download/rstudio-server/</a></font><br><font face="Arial" color=#0000FF>sudo apt-get install gdebi-core</font><br><font face="Arial" color=#0000FF>wget <a target="_blank" rel="noopener" href="https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.09.1-494-amd64.deb">https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.09.1-494-amd64.deb</a></font><br><font face="Arial" color=#0000FF>sudo gdebi rstudio-server-2023.09.1-494-amd64.deb</font></p>
+<pre><code class="hljs bash">4、修改Rstudio server配置，使用micromamba安装的R</code></pre>
+
+<p><font face="宋体" >接下来首先用micromamba创建一个包含4.2.3版本R的虚拟环境。</font><br><font face="Arial" color=#0000FF>micromamba create -n R4.2.3 r-base&#x3D;4.2.3</font><br><font face="宋体" >随后修改Rstudio server配置文件的内容，将其调用的R的路径更换为用micromamba安装的R的路径。Rstudio server配置文件的路径应该是：&#x2F;etc&#x2F;rstudio&#x2F;rserver.conf</font><br><font face="宋体" >用vim打开该文件，并且将文件内容修改如下：</font><br><font face="Arial" color=#0000FF>vim &#x2F;etc&#x2F;rstudio&#x2F;rserver.conf</font><br><img src="https://github.com/zczali4403/photo/blob/main/rserver_conf.png?raw=true" alt="rserver_conf" title="rserver_conf"><br><font face="宋体" >上面一行是R的路径，下面一行是R的library的路径。</font><br><font face="宋体" >关于vim如何使用可以自行google。</font><br><font face="宋体" >如果不知道自己用micromamba安装的R路径在哪，可以先激活该环境，然后用which R查看路径。</font><br><font face="Arial" color=#0000FF>micromamba activate R4.2.3</font><br><font face="Arial" color=#0000FF>which R</font><br><img src="https://github.com/zczali4403/photo/blob/main/which_R.png?raw=true" alt="which_R" title="which_R"></p>
+<pre><code class="hljs bash">5、打开Rstudio server查看效果</code></pre>
+
+<p><font face="宋体" >现在一切都配置好了，就可以打开Rstudio server看看是否成功。</font><br><font face="Arial" color=#0000FF>sudo rstudio-server start</font><br><font face="宋体" >打开之后，在浏览器中输入：localhost:8787。输入之后按回车就可以进入Rstudio server了，8787是Rstudio server默认的端口。</font><br><font face="宋体" >进入之后，首先要输入ubuntu的账户和密码进行登录。</font><br><img src="https://github.com/zczali4403/photo/blob/main/sign_in.png?raw=true" alt="sign_in" title="sign_in"><br><font face="宋体" >登录之后，就可以进入Rstudio server啦！可以看到版本号和micromamba安装的R是一致的，流程结束！现在就可以实现用micromamba随心所欲安装各种R包，管理整个R的环境了！</font><br><img src="https://github.com/zczali4403/photo/blob/main/Rstudio_server.png?raw=true" alt="Rstudio_server" title="Rstudio_server"></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/11/17/wsl_Rstudio/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/11/13/%E6%96%B0%E7%94%B5%E8%84%91%E5%92%8C%E9%85%8D%E7%BD%AE/">电脑装机必备软件列表</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-13</span>
       <p><div class="note default">
@@ -363,18 +391,6 @@ https://kenhanscombe.github.io/ukbtools/articles/explore-ukb-data.html
 <p><font face="楷体" >（1）在用CDOCKER进行对接的时候，总是出现对接失败的结果，当把目标蛋白的引发酶结构域去除，则可以对接成功，不知道是什么原因。或许是因为蛋白质分子太大？</font><br><font face="楷体" >（2）因为把目标蛋白的引发酶结构域去除之后CDOCKER才可以对接成功，因此在进行初筛Libdock的时候也将引发酶结构域去除了，但是这样会不会对接结果产生什么影响呢？也就是说，虽然对接位点不在引发酶结构域，而是在解旋酶（ATPase）结构域上，但是拿完整的目标蛋白进行对接和拿除去了引发酶结构域的蛋白进行对接所得到的结果有没有什么区别呢？</font></p>
 </p>
       <div class="post-button"><a class="btn" href="/2023/02/23/discovery-studio/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2023/02/20/kaoyan/">考研篇</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-02-20</span>
-      <p><div class="note default">
-            <h1 id="鹏北海，凤朝阳，又携书剑路茫茫"><a href="#鹏北海，凤朝阳，又携书剑路茫茫" class="headerlink" title="鹏北海，凤朝阳，又携书剑路茫茫"></a><font face="宋体" >鹏北海，凤朝阳，又携书剑路茫茫</font></h1>
-          </div>
-<p><font face="宋体" >明天似乎就是今年考研出分的日子，看到群里的学弟学妹们，仿佛看到了当年的自己。一直想写一些关于考研的东西，因为它带给我的实在是太多太多，但是一直不知道从何写起，正好借今天这个契机，随便写点什么。</font></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2023/02/20/kaoyan/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
