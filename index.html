@@ -87,6 +87,27 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/11/20/hexo_transfer/">Robocopy迁移hexo文件保证博客更新时间不变</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-20</span>
+      <p><div class="note default">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font face="宋体" >前言</font></h1>
+          </div>
+
+<p><font face="宋体" >说起来已经有好几篇博客的源头都是因为换了新电脑，这篇也是一样。因为这个博客是用hexo框架搭建的，之前的博客更新全在我的笔记本电脑上面，但是换了新台式电脑之后就需要把 hexo文件全部迁移过来，在新电脑上进行博客的撰写可更新。但是当我简单的把需要的文件全部拷贝到新电脑上的时候，发现我的博客更新时间全变成了拷贝的时间。</font></p>
+<p><img src="https://github.com/zczali4403/photo/blob/main/blog_update_time_error.png?raw=true" alt="blog_time_wrong" title="blog_time_wrong"></p>
+<p><font face="宋体" >这是因为普通的拷贝会把文件的修改时间设置为拷贝的时间，而Hexo默认是以文件的修改时间作为文章的更新时间的。因此可以看到上面所有的博客的更新时间都被错误的同样设置为11月13号。</font></p>
+<div class="note default">
+            <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a><font face="宋体" >解决方法</font></h1>
+          </div>
+
+<p><font face="宋体" >既然普通的复制会自动把文件的修改时间设置为复制的时间，那如果能在复制文件的时候保持文件的修改时间不变就可以解决这些问题了。当然也可以尝试其他的解决方法，比如修改hexo一些配置文件的设置，让其不以文件的修改时间作为默认的博客更新时间，但是我尝试了一下没有成功，所以干脆选择了这种简单粗暴的方法——Robocopy</font></p>
+<p><font face="宋体" >robocopy是windows自带的一个复制工具，它可以在复制文件的同时保留文件的时间戳，在windows的terminal中就可以使用。</font><br><font face="Arial" color=#0000FF>robocopy D:\Document H:\Project &#x2F;e</font><br><font face="宋体" >上面这行命令的意思就是将第一个文件夹中的所有文件全部复制到第二个文件夹中。</font><br><font face="宋体" >因此通过robocopy就可以实现hexo文件在不同电脑中的迁移，同时不改变文件的修改时间，从而保持博客的更新时间不变。</font></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/11/20/hexo_transfer/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/11/17/wsl_Rstudio/">WSL中Rstudio-server调用mamba虚拟环境中的R</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-11-17</span>
       <p><div class="note default">
@@ -356,41 +377,6 @@ https://kenhanscombe.github.io/ukbtools/articles/explore-ukb-data.html
 <p><font face="楷体" >至此使用Autodock vina进行分子对接的流程已经全部介绍完毕，对于结果文件的分析将写在下一期的文章中</font></p>
 </p>
       <div class="post-button"><a class="btn" href="/2023/02/23/Autodock/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2023/02/23/discovery-studio/">Discovery Studio分子对接</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-02-23</span>
-      <p><div class="note default">
-            <h1 id="Discovery-Sudio分子对接的流程"><a href="#Discovery-Sudio分子对接的流程" class="headerlink" title="Discovery Sudio分子对接的流程"></a><font face="宋体" >Discovery Sudio分子对接的流程</font></h1>
-          </div>
-
-<pre><code class="hljs bash">1、准备蛋白质受体文件</code></pre>
-
-<p><font face="楷体" >首先在DS中打开蛋白质受体的PDB文件，一般在做分子对接之前，需要把蛋白质中的水分子删掉，因此如果蛋白质中有水分子，选中水分子点击右键然后点击cut将水分子删除</font></p>
-<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/DS1.png" alt="图1" title="图1"></p>
-<p><font face="楷体" >然后需要对蛋白质分子进行Clean Protein，去除多余构象、补充非完整氨基酸残基、加氢等。点击Macromolecules——Prepare Protein——Clean Protein</font></p>
-<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/DS2.png" alt="图2" title="图2"></p>
-<p><font face="楷体" >此时蛋白质受体文件就准备好了</font></p>
-<pre><code class="hljs bash">2、准备小分子配体文件</code></pre>
-
-<p><font face="楷体" >打开小分子配体文件，可以是sdf或者mol等格式。然后点击Small Molecules——Prepare or Filter Ligands——Prepare Ligands，生成不同构象的小分子配体</font></p>
-<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/DS3.png" alt="图3" title="图3"></p>
-<p><font face="楷体" >此时小分子配体文件就准备好了</font></p>
-<pre><code class="hljs bash">3、定义活性位点</code></pre>
-
-<p><font face="楷体" >活性位点的定义有三种方式：一是From Receptor Cavities，即软件自动寻找蛋白质中可能可以对接的空腔；二是From PDB Site Records，即有些PDB数据库中的蛋白质文件记录了该蛋白的活性位点，这种情况较少；三是From Current Selection，即可以选择氨基酸残基，然后以选择的氨基酸残基为中心定义活性位点。定义好活性位点之后，会显示一个透明的球状区域，鼠标左键点击选中该区域，右键选择Attributes，可以更改活性位点的属性如半径等</font></p>
-<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/DS4.png" alt="图4" title="图4"></p>
-<pre><code class="hljs bash">4、用Libdock进行对接</code></pre>
-<p><font face="楷体" >Libdock是一种快速对接的方法，可以用于对小分子化合物库进行初步筛选，然后选取其中得分较高的小分子使用CDOCKER进行复筛。点击Receptor-Ligand Interactions——Dock Ligands——Dock Ligands（Libdock）</font></p>
-<p><img src="https://raw.githubusercontent.com/zczali4403/photo/main/DS5.png" alt="图5" title="图5"></p>
-<p><font face="楷体" >可以设置Parallel Processing参数为True进行并行计算，这样会加快计算速度</font></p>
-<pre><code class="hljs bash">5、一些问题</code></pre>
-
-<p><font face="楷体" >（1）在用CDOCKER进行对接的时候，总是出现对接失败的结果，当把目标蛋白的引发酶结构域去除，则可以对接成功，不知道是什么原因。或许是因为蛋白质分子太大？</font><br><font face="楷体" >（2）因为把目标蛋白的引发酶结构域去除之后CDOCKER才可以对接成功，因此在进行初筛Libdock的时候也将引发酶结构域去除了，但是这样会不会对接结果产生什么影响呢？也就是说，虽然对接位点不在引发酶结构域，而是在解旋酶（ATPase）结构域上，但是拿完整的目标蛋白进行对接和拿除去了引发酶结构域的蛋白进行对接所得到的结果有没有什么区别呢？</font></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2023/02/23/discovery-studio/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
