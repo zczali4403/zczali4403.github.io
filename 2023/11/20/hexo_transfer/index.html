@@ -99,7 +99,9 @@
           </div>
 
 <p><font face="宋体" >既然普通的复制会自动把文件的修改时间设置为复制的时间，那如果能在复制文件的时候保持文件的修改时间不变就可以解决这些问题了。当然也可以尝试其他的解决方法，比如修改hexo一些配置文件的设置，让其不以文件的修改时间作为默认的博客更新时间，但是我尝试了一下没有成功，所以干脆选择了这种简单粗暴的方法——Robocopy</font></p>
-<p><font face="宋体" >robocopy是windows自带的一个复制工具，它可以在复制文件的同时保留文件的时间戳，在windows的terminal中就可以使用。</font><br><font face="Arial" color=#0000FF>robocopy D:\Document H:\Project &#x2F;e</font><br><font face="宋体" >上面这行命令的意思就是将第一个文件夹中的所有文件全部复制到第二个文件夹中。</font><br><font face="宋体" >因此通过robocopy就可以实现hexo文件在不同电脑中的迁移，同时不改变文件的修改时间，从而保持博客的更新时间不变。</font></p>
+<p><font face="宋体" >robocopy是windows自带的一个复制工具，它可以在复制文件的同时保留文件的时间戳，在windows的terminal中就可以使用。</font></p>
+<p><font face="Arial" color=#0000FF>robocopy D:\Document H:\Project &#x2F;e</font></p>
+<p><font face="宋体" >上面这行命令的意思就是将第一个文件夹中的所有文件全部复制到第二个文件夹中。</font><br><font face="宋体" >因此通过robocopy就可以实现hexo文件在不同电脑中的迁移，同时不改变文件的修改时间，从而保持博客的更新时间不变。</font></p>
 
       </div>
     </div>
