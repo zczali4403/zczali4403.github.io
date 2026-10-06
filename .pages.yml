@@ -1,0 +1,50 @@
+media:
+  - name: blog_images
+    label: 日记图片
+    input: assets/blog
+    output: /assets/blog
+    extensions: [jpg, jpeg, png, webp, gif]
+    rename: random
+content:
+  - name: diary
+    label: 日记与文章
+    type: collection
+    path: content/posts
+    format: json
+    subfolders: false
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}-{primary}.json"
+      field: false
+    operations:
+      rename: false
+    view:
+      primary: title
+      fields: [title, date]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 日期
+        type: date
+        required: true
+        options:
+          time: false
+          format: yyyy-MM-dd
+      - name: content
+        label: 正文
+        type: rich-text
+        required: true
+        description: 点击编辑器中的图片按钮，上传照片或选择已有图片。保存后会自动发布到公开网站。
+        options:
+          format: html
+          media: blog_images
+          switcher: true
+      - name: url
+        label: 原文章地址
+        type: string
+        readonly: true
+        description: 旧文章保留原链接；新文章留空，发布时自动生成。
