@@ -30,4 +30,4 @@ The dependency-free script regenerates article pages, `/blog/`, existing archive
 
 The output is plain HTML/CSS/JavaScript. No package installation or build service is needed. Publish this repository's root using GitHub Pages; `.nojekyll` is included. Blog links target the root domain `zczali4403.github.io`.
 
-Map geometry and campus photos are local. Attribution is in `assets/ATTRIBUTION.md`. Existing blog images retain their original external URLs and depend on those hosts remaining available.
+Map geometry and campus photos are local. Attribution is in `assets/ATTRIBUTION.md`. All 80 images from the former photo repository are stored under `assets/blog/`, unchanged. Article image URLs point to this site; the blog no longer depends on that repository. A full local backup of the original repository is retained in the sibling `previous-site-files/photo-repository-backup` directory.

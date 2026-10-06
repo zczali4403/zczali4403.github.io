@@ -14,13 +14,13 @@
 <p><font face="Arial" color=#0000FF>sudo cp -v &#x2F;etc&#x2F;apt&#x2F;sources.list &#x2F;etc&#x2F;apt&#x2F;sources.list.backup</font></p>
 <p><font face="宋体" >随后可以设置一下这个文件的权限，方便修改。</font></p>
 <p><font face="Arial" color=#0000FF>sudo chmod 777 &#x2F;etc&#x2F;apt&#x2F;sources.list</font></p>
-<p><font face="宋体" >然后用vim对该文件进行修改，把文件内容替换为如下内容：</font><br><img src="https://github.com/zczali4403/photo/blob/main/apt_sources.png?raw=true" alt="apt_sources" title="apt_sources"><br><font face="宋体" >修改之后进行一次更新。</font></p>
+<p><font face="宋体" >然后用vim对该文件进行修改，把文件内容替换为如下内容：</font><br><img src="/assets/blog/apt_sources.png" alt="apt_sources" title="apt_sources"><br><font face="宋体" >修改之后进行一次更新。</font></p>
 <p><font face="Arial" color=#0000FF>sudo apt update</font></p>
 <pre><code class="hljs bash">2、安装micromamba</code></pre>
 
 <p><font face="宋体" >然后就是micromamba的安装，关于micromamba&#x2F;mamba&#x2F;conda这里就不再详细说明，总之mamba是conda的一个替代产品，它的速度会比conda更快，而micromamba，顾名思义，就是micro的mamba。micromamba&#x2F;mamba的所有命令和conda都是一样的，当然这里也可以选择使用conda或者mamba。</font><br><font face="宋体" >micromamba的下载步骤在官网介绍的很清楚：<a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#">https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#</a></font><br><font face="宋体" >首先下载并解压micromamba（这里下载的是针对自己系统版本的micromamba，不同系统不一样）</font></p>
 <p><font face="Arial" color=#0000FF>curl -Ls <a target="_blank" rel="noopener" href="https://micro.mamba.pm/api/micromamba/linux-64/latest">https://micro.mamba.pm/api/micromamba/linux-64/latest</a> | tar -xvj bin&#x2F;micromamba</font></p>
-<p><font face="宋体" >其他系统版本的下载命令如下：</font><br><img src="https://github.com/zczali4403/photo/blob/main/micromamba.png?raw=true" alt="micromamba" title="micromamba"><br><font face="宋体" >解压完成后配置一下micromamba的环境，在环境变量中添加micromamba，以便可以在任意位置调用。</font></p>
+<p><font face="宋体" >其他系统版本的下载命令如下：</font><br><img src="/assets/blog/micromamba.png" alt="micromamba" title="micromamba"><br><font face="宋体" >解压完成后配置一下micromamba的环境，在环境变量中添加micromamba，以便可以在任意位置调用。</font></p>
 <p><font face="Arial" color=#0000FF>.&#x2F;bin&#x2F;micromamba shell init -s bash -p ~&#x2F;micromamba</font><br><font face="Arial" color=#0000FF>source ~&#x2F;.bashrc</font></p>
 <p><font face="宋体" >micromamba到此就安装好了，现在就可以使用它创建新的环境并且安装不同版本的R了。micromamba或者mamba更详细的安装和使用说明见上面的官网链接。</font></p>
 <pre><code class="hljs bash">3、安装Rstudio server</code></pre>
@@ -33,11 +33,11 @@
 <p><font face="Arial" color=#0000FF>micromamba create -n R4.2.3 r-base&#x3D;4.2.3</font></p>
 <p><font face="宋体" >随后修改Rstudio server配置文件的内容，将其调用的R的路径更换为用micromamba安装的R的路径。Rstudio server配置文件的路径应该是：&#x2F;etc&#x2F;rstudio&#x2F;rserver.conf</font><br><font face="宋体" >用vim打开该文件，并且将文件内容修改如下：</font></p>
 <p><font face="Arial" color=#0000FF>vim &#x2F;etc&#x2F;rstudio&#x2F;rserver.conf</font></p>
-<p><img src="https://github.com/zczali4403/photo/blob/main/rserver_conf.png?raw=true" alt="rserver_conf" title="rserver_conf"><br><font face="宋体" >上面一行是R的路径，下面一行是R的library的路径。</font><br><font face="宋体" >关于vim如何使用可以自行google。</font><br><font face="宋体" >如果不知道自己用micromamba安装的R路径在哪，可以先激活该环境，然后用which R查看路径。</font></p>
+<p><img src="/assets/blog/rserver_conf.png" alt="rserver_conf" title="rserver_conf"><br><font face="宋体" >上面一行是R的路径，下面一行是R的library的路径。</font><br><font face="宋体" >关于vim如何使用可以自行google。</font><br><font face="宋体" >如果不知道自己用micromamba安装的R路径在哪，可以先激活该环境，然后用which R查看路径。</font></p>
 <p><font face="Arial" color=#0000FF>micromamba activate R4.2.3</font><br><font face="Arial" color=#0000FF>which R</font></p>
-<p><img src="https://github.com/zczali4403/photo/blob/main/which_R.png?raw=true" alt="which_R" title="which_R"></p>
+<p><img src="/assets/blog/which_R.png" alt="which_R" title="which_R"></p>
 <pre><code class="hljs bash">5、打开Rstudio server查看效果</code></pre>
 
 <p><font face="宋体" >现在一切都配置好了，就可以打开Rstudio server看看是否成功。</font></p>
 <p><font face="Arial" color=#0000FF>sudo rstudio-server start</font></p>
-<p><font face="宋体" >打开之后，在浏览器中输入：localhost:8787。输入之后按回车就可以进入Rstudio server了，8787是Rstudio server默认的端口。</font><br><font face="宋体" >进入之后，首先要输入ubuntu的账户和密码进行登录。</font><br><img src="https://github.com/zczali4403/photo/blob/main/sign_in.png?raw=true" alt="sign_in" title="sign_in"><br><font face="宋体" >登录之后，就可以进入Rstudio server啦！可以看到版本号和micromamba安装的R是一致的，流程结束！现在就可以实现用micromamba随心所欲安装各种R包，管理整个R的环境了！</font><br><img src="https://github.com/zczali4403/photo/blob/main/Rstudio_server.png?raw=true" alt="Rstudio_server" title="Rstudio_server"></p></article><nav class="article-pagination" aria-label="相邻文章"><a href="/2023/11/20/hexo_transfer/"><span>NEWER ENTRY</span><strong>Robocopy迁移hexo文件保证博客更新时间不变</strong></a><a href="/2023/11/13/%E6%96%B0%E7%94%B5%E8%84%91%E5%92%8C%E9%85%8D%E7%BD%AE/"><span>OLDER ENTRY</span><strong>电脑装机必备软件列表</strong></a></nav><a class="back-to-writing" href="/blog/">← All writing</a></main><footer class="wrap"><a href="/">Chengzhi Zhao · AI for Biology</a><span>已识乾坤大，犹怜草木青</span><a href="#">Back to top ↑</a></footer></body></html>
+<p><font face="宋体" >打开之后，在浏览器中输入：localhost:8787。输入之后按回车就可以进入Rstudio server了，8787是Rstudio server默认的端口。</font><br><font face="宋体" >进入之后，首先要输入ubuntu的账户和密码进行登录。</font><br><img src="/assets/blog/sign_in.png" alt="sign_in" title="sign_in"><br><font face="宋体" >登录之后，就可以进入Rstudio server啦！可以看到版本号和micromamba安装的R是一致的，流程结束！现在就可以实现用micromamba随心所欲安装各种R包，管理整个R的环境了！</font><br><img src="/assets/blog/Rstudio_server.png" alt="Rstudio_server" title="Rstudio_server"></p></article><nav class="article-pagination" aria-label="相邻文章"><a href="/2023/11/20/hexo_transfer/"><span>NEWER ENTRY</span><strong>Robocopy迁移hexo文件保证博客更新时间不变</strong></a><a href="/2023/11/13/%E6%96%B0%E7%94%B5%E8%84%91%E5%92%8C%E9%85%8D%E7%BD%AE/"><span>OLDER ENTRY</span><strong>电脑装机必备软件列表</strong></a></nav><a class="back-to-writing" href="/blog/">← All writing</a></main><footer class="wrap"><a href="/">Chengzhi Zhao · AI for Biology</a><span>已识乾坤大，犹怜草木青</span><a href="#">Back to top ↑</a></footer></body></html>
