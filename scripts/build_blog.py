@@ -21,7 +21,7 @@ def excerpt(post, limit=92):
 
 def header():
     return '''<a class="skip" href="#content">Skip to content</a>
-<header class="site-header wrap"><a class="brand" href="/"><span class="brand-symbol" aria-hidden="true">cz.</span><span>Chengzhi Zhao</span><span class="brand-en">AI × BIOLOGY</span></a><nav aria-label="Main navigation"><a href="/#journey">Journey</a><a href="/#research">Research</a><a href="/#about">About</a><a class="nav-current" aria-current="page" href="/blog/">Writing</a></nav></header>'''
+<header class="site-header wrap"><a class="brand" href="/"><span class="brand-symbol" aria-hidden="true">cz.</span><span>Chengzhi Zhao</span><span class="brand-en">AI × BIOLOGY</span></a><nav aria-label="Main navigation"><a href="/#journey">Journey</a><a href="/#education">Education</a><a href="/#research">Research</a><a href="/#about">About</a><a class="nav-current" aria-current="page" href="/blog/">Writing</a></nav></header>'''
 
 def page(title, description, url, body):
     return f'''<!doctype html>
