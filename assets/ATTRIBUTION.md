@@ -27,6 +27,10 @@ Retrieved 2026-10-06. Photographs are sourced from the schools' public websites;
   - Image: https://news.fudan.edu.cn/_upload/article/images/57/7c/d76b89704a46b4d4558cf78cfa21/50af4003-f223-49c2-9b61-ad134104e240_d.jpg
   - Local: `photos/shanghai.jpg`
 
+## About illustration
+
+The site owner supplied the AI for Biology diagram. The About section displays `ai-for-biology-preview.webp` and links to the full-resolution copy in `ai-for-biology-overview.webp`.
+
 ## Blog image migration
 
 All 80 image files from `zczali4403/photo` at commit `eab95dd1078b606c19b1100c0d7e1c43b31a2ef2` were copied without modification into `blog/` on 2026-10-06. Article image references now use `/assets/blog/`. Original filenames, bytes and article captions were preserved.

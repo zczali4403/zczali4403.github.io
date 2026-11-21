@@ -33,6 +33,45 @@ h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(64px,6.5vw,96px);
 .writing-read{font-size:12px;margin-top:auto;padding:8px 0;display:flex;gap:20px}
 .writing-main{padding-top:72px;padding-bottom:84px}
 .writing-heading h1{font:clamp(36px,4.5vw,64px)/1.15 Georgia,serif;letter-spacing:-1.5px;margin:0 0 26px}
+.about-section {
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  column-gap: clamp(24px, 5vw, 80px);
+}
+.about-intro {
+  min-width: 0;
+  display: grid;
+  grid-template: auto minmax(0, 1fr) / minmax(0, 1fr);
+  row-gap: 18px;
+}
+.about-art {
+  container-type: size;
+}
+.about-cover {
+  display: block;
+  max-width: 100%;
+  width: min(100%, 22rem);
+  /* Fit the 4:3 diagram within the space left by the heading and biography. */
+  width: min(100cqw, calc(100cqh * 4 / 3));
+  cursor: zoom-in;
+}
+.about-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .about-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about-intro {
+    grid-template: auto / minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(12px, 3vw, 24px);
+  }
+  .about-art { container-type: normal; }
+  .about-cover { width: 100%; }
+  .about-copy { max-width: none; }
+}
 .writing-heading .eyebrow{font-size:10px;margin-bottom:24px}
 .writing-intro{font-size:15px;line-height:1.9;color:var(--muted)}
 .writing-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding:25px 0;margin-top:46px;margin-bottom:12px}
