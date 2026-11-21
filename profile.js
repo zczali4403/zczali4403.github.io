@@ -2,7 +2,7 @@
 window.PROFILE = {
   name: 'Chengzhi Zhao',
   intro: 'Ph.D. Student · AI for Biology\nDepartment of Medical Systems Biology\nSchool of Basic Medical Sciences, Fudan University',
-  about: 'I am a Ph.D. student in the Department of Medical Systems Biology at the School of Basic Medical Sciences, Fudan University. My research sits at the intersection of artificial intelligence and biomedicine, with a focus on single-cell and spatial omics, developmental biology, perturbation prediction, generative modeling, and biological foundation models.',
+  about: 'I am a Ph.D. student in the Department of Medical Systems Biology at the School of Basic Medical Sciences, Fudan University. My research sits at the intersection of artificial intelligence and biomedicine, with a focus on single-cell and spatial omics, developmental biology, perturbation prediction, generative modeling, and biological foundation models. I previously participated in joint training and research work associated with Microsoft Research Asia.',
   signature: 'Understanding biology, one cell at a time.',
   links: [{ label: 'GitHub ↗', url: 'https://github.com/zczali4403' }],
   stops: [

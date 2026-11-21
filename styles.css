@@ -34,24 +34,24 @@ h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(64px,6.5vw,96px);
 .writing-main{padding-top:72px;padding-bottom:84px}
 .writing-heading h1{font:clamp(36px,4.5vw,64px)/1.15 Georgia,serif;letter-spacing:-1.5px;margin:0 0 26px}
 .about-section {
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  column-gap: clamp(24px, 5vw, 80px);
+  display: block;
+  container-type: inline-size;
 }
-.about-intro {
-  min-width: 0;
+.about-heading {
+  margin-bottom: 24px;
+}
+.about-heading h2 {
+  font-size: min(2.125rem, 7.5cqi);
+  white-space: nowrap;
+}
+.about-body {
   display: grid;
-  grid-template: auto minmax(0, 1fr) / minmax(0, 1fr);
-  row-gap: 18px;
-}
-.about-art {
-  container-type: size;
+  grid-template-columns: min(44%, 31rem) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
 }
 .about-cover {
   display: block;
-  max-width: 100%;
-  width: min(100%, 22rem);
-  /* Fit the 4:3 diagram within the space left by the heading and biography. */
-  width: min(100cqw, calc(100cqh * 4 / 3));
+  align-self: start;
   cursor: zoom-in;
 }
 .about-cover img {
@@ -59,18 +59,32 @@ h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(64px,6.5vw,96px);
   width: 100%;
   height: auto;
 }
-@media (max-width: 760px) {
-  .about-section {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .about-intro {
-    grid-template: auto / minmax(0, 1.35fr) minmax(0, 1fr);
-    align-items: center;
-    column-gap: clamp(12px, 3vw, 24px);
-  }
-  .about-art { container-type: normal; }
-  .about-cover { width: 100%; }
-  .about-copy { max-width: none; }
+.about-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 0;
+}
+.about-copy > p {
+  margin: 0;
+  line-height: 1.75;
+}
+.about-closing {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.about-closing .about-signature {
+  margin: 0;
+  line-height: 1.4;
+}
+@media (max-width: 920px) {
+  .about-body { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .about-cover { width: min(100%, 28rem); }
+  .about-copy { max-width: 65ch; }
 }
 .writing-heading .eyebrow{font-size:10px;margin-bottom:24px}
 .writing-intro{font-size:15px;line-height:1.9;color:var(--muted)}
