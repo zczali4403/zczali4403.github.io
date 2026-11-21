@@ -26,7 +26,7 @@ def header():
 def page(title, description, url, body):
     return f'''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)} · Chengzhi Zhao</title><meta name="description" content="{esc(description, quote=True)}"><meta name="theme-color" content="#194b40"><link rel="canonical" href="https://zczali4403.github.io{url}"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/styles.css"></head>
-<body class="writing-page">{header()}{body}<footer class="wrap"><a href="/">Chengzhi Zhao · AI for Biology</a><span>已识乾坤大，犹怜草木青 · <a href="/admin/">写作后台</a></span><a href="#">Back to top ↑</a></footer></body></html>\n'''
+<body class="writing-page">{header()}{body}<footer class="wrap"><a href="/">Chengzhi Zhao · AI for Biology</a><span>已识乾坤大，犹怜草木青</span><a href="#">Back to top ↑</a></footer></body></html>\n'''
 
 def write(url, content):
     path = OUTPUT / unquote(url.lstrip('/')) / 'index.html'
